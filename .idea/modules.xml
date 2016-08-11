@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GP_YSY.iml" filepath="$PROJECT_DIR$/GP_YSY.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CURTAINCALL.iml" filepath="$PROJECT_DIR$/CURTAINCALL.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

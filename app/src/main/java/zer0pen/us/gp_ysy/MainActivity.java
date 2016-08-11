@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ListView;
@@ -17,7 +18,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private View header;
+    private View header, touchView;
     public static WebView webView;
     public static DrawerLayout drawer;
     private ListView navView;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        touchView = (View) findViewById(R.id.touch_view);
         webView = (WebView) findViewById(R.id.webView);
         navView = (ListView) findViewById(R.id.nav_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -46,12 +48,56 @@ public class MainActivity extends AppCompatActivity {
         navView.addHeaderView(header);
         navView.setAdapter(adapter);
 
-        webView.setWebViewClient(new WebViewClient());
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                isHome();
+            }
+        });
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setSupportZoom(true);
+        webView.getSettings().setPluginState(WebSettings.PluginState.ON_DEMAND);
+        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         //webView.loadUrl("http://www.google.co.kr");
         webView.loadUrl("http://sunrin.graphics/2016/");
+
+        /*Log.d("asdf", webView.getUrl().equals("http://sunrin.graphics/2016/") + "");
+
+        if (webView.getUrl().equals("http://sunrin.graphics/2016/")) {
+
+            if (touchView.getVisibility() == View.GONE)
+                touchView.setVisibility(View.VISIBLE);
+
+            touchView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("asdf", "touched");
+                    webView.loadUrl("http://sunrin.graphics/2016/main");
+                    touchView.setVisibility(View.GONE);
+                }
+            });
+        }*/
+    }
+
+    public void isHome() {
+        Log.d("asdf", webView.getUrl().equals("http://sunrin.graphics/2016/") + "");
+
+        if (webView.getUrl().equals("http://sunrin.graphics/2016/")) {
+
+            if (touchView.getVisibility() == View.GONE)
+                touchView.setVisibility(View.VISIBLE);
+
+            touchView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("asdf", "touched");
+                    webView.loadUrl("http://sunrin.graphics/2016/main");
+                    touchView.setVisibility(View.GONE);
+                }
+            });
+        }
     }
 
     @Override
